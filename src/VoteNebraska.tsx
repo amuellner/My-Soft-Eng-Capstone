@@ -1,4 +1,4 @@
-import VoteNebraska from './VoteNebraska.svg'
+/*import VoteNebraska from './VoteNebraska.svg'
 
 function VoteNebraska(){
     return (
@@ -8,4 +8,4 @@ function VoteNebraska(){
             </a> 
         </div>
     )
-}
+}*/
