@@ -1,35 +1,27 @@
+//import React from "react";
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect } from 'react'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const myApp = () => {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        //const myUrl = 'https://vote-for-nebraska-361.com/'?api-key=${process.env.REACT_APP_API};
+        fetch('https://vote-for-nebraska-361.com/')
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Error returned', error);
+                setLoading(false);
+    });
+}, []);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+return(
+    <div> {loading ? <p>Loading...</p> : <pre>{JSON.stringify(data, null, 2)}</pre>} </div>
+);
+};
+export default myApp;
